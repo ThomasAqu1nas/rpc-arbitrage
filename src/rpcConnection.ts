@@ -5,3 +5,4 @@ dotenv.config();
 export const jsonRpcProvider = new ethers.JsonRpcProvider(
     process.env.RPC_URL as string
 )
+
