@@ -1,26 +1,20 @@
 import { readFile } from "fs";
 import { promisify } from "util";
+import { ethers } from "ethers";
 
 // Преобразуем readFile в версию, которая возвращает Promise
 const readFileAsync = promisify(readFile);
 
-interface Transaction {
-	data?: string;
-}
-
 const filePath = "./transactions.json";
 
-async function getTransactionData() {
+export async function getTransactions() {
 	try {
 		const data = await readFileAsync(filePath);
-		const transactions: Transaction[] = JSON.parse(data.toString());
+		const transactions: ethers.TransactionResponse[] = JSON.parse(data.toString());
 
-		const transactionData = transactions.map((tx: Transaction) => (tx.data ? tx.data : "Поле data отсутствует"));
-		return transactionData;
+		return transactions;
 	} catch (error: any) {
 		console.error("Ошибка:", error.message);
 		throw error;
 	}
 }
-
-getTransactionData().then((data) => console.log(data));

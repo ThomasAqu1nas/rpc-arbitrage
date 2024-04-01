@@ -21,3 +21,12 @@ export function getFunctionSelectors(contract: ethers.ContractFactory) {
 
 	return selectors;
 }
+
+export function findFragmentWithSelector(contract: ethers.ContractFactory, selector: string) {
+	const fragments = contract.interface.fragments;
+	const index = fragments.findIndex((fragment) => getFunctionSelector(fragment.format("sighash")) === selector);
+
+	return index >= 0 ? fragments[index] : null;
+}
+
+console.log(getFunctionSelector("execute(bytes,bytes[],uint256)"));
