@@ -28,13 +28,9 @@ export function parse(tx: ethers.TransactionResponse) {
 
 		const commandBytes = ethers.getBytes(parsed[0]);
 
-		console.log(commands);
-
-		console.log(parsed);
+		console.log("TRANSACTION:", tx, "\n");
 	} else if (addresses.mainnet.uniswap.universalRouter === to && selector === "0x3593564c") {
 		const parsed = UniversalRouter.interface.parseTransaction(tx)!.args;
-
-		console.log("TRANSACTION:", tx);
 
 		const commandBytes = ethers.getBytes(parsed[0]);
 
@@ -44,23 +40,24 @@ export function parse(tx: ethers.TransactionResponse) {
 
 			console.log(command_value);
 
-			if (command_value) {
-				if (command_value.type === 0) {
-					const encoded = parsed[1][id];
+			if (command_id == 0 || command_id == 1) {
+				const encoded = parsed[1][id];
 
-					const decoded = abi.decode(command_value.iface, parsed[1][id]);
-					//const paths = decoded[3];
-					console.log("##################################################");
-					console.log("encoded: ", encoded);
-					console.log("-------------------------------------------------");
-					console.log("decoded: ", decoded);
-					console.log("##################################################");
+				const decoded = abi.decode(command_value!.iface, parsed[1][id]);
 
-					// console.log(args);
-				}
+				console.log(decoded);
+
+				// decoded[3] - строка адресов
+
+				//const paths = decoded[3];
+				// console.log("##################################################");
+				// console.log("encoded: ", encoded);
+				// console.log("-------------------------------------------------");
+				// console.log("decoded: ", decoded);
+				// console.log("##################################################");
+
+				// console.log(args);
 			}
-
-			console.log(parsed);
 		});
 	}
 }
