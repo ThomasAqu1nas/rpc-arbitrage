@@ -5,18 +5,6 @@ import addresses from "./addresses.json";
 import { UniversalRouter } from "./Factories";
 import { getTransactions } from "./read";
 
-function parseTransactionData(tx: ethers.TransactionResponse | null): [string, ethers.Result] | undefined {
-	if (tx !== null && typeof tx.data !== "undefined") {
-		const calldataSelector = tx.data.substring(0, 10);
-		const functionFragment = prefixes.get(calldataSelector);
-		if (functionFragment) {
-			const iface = new ethers.Interface([functionFragment]);
-			const decodedData = iface.decodeFunctionData(functionFragment, tx.data);
-			return [functionFragment.name, decodedData];
-		}
-	}
-}
-
 const abi = new ethers.AbiCoder();
 
 export function parse(tx: ethers.TransactionResponse) {
@@ -43,13 +31,32 @@ export function parse(tx: ethers.TransactionResponse) {
 			if (command_id == 0 || command_id == 1) {
 				const encoded = parsed[1][id];
 
-				const decoded = abi.decode(command_value!.iface, parsed[1][id]);
+				
 
-				console.log(decoded);
+                if (command_value) {
+                    const decoded = abi.decode(command_value!.iface, parsed[1][id]);
+                    const paths = decoded[3];
+                    let hexified_paths = ethers.toBeHex(paths)
+                    let i = 0;
+                    while (hexified_paths !== "") {
+                        if (i % 2 === 0) {
+                            const paths_array = []
+                            let [rest, current] = [
+                                hexified_paths.substring(0, hexified_paths.length - 23), 
+                                hexified_paths.substring(hexified_paths.length)
+                            ]
+                            hexified_paths = rest;
+                            
+                            
+                        }
+                    }
+                    //console.log(decoded);
+                }
+                
 
 				// decoded[3] - строка адресов
 
-				//const paths = decoded[3];
+				// const paths = decoded[3];
 				// console.log("##################################################");
 				// console.log("encoded: ", encoded);
 				// console.log("-------------------------------------------------");
