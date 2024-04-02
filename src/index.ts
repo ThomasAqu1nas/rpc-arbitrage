@@ -4,8 +4,12 @@ import { commands, DataValueType } from "./commands";
 import addresses from "./addresses.json";
 import { UniversalRouter } from "./Factories";
 import { getTransactions } from "./read";
+import "@uniswap/v3-periphery";
 import { Pool, SwapRoute } from "./dex";
 import { FeeAmount } from "@uniswap/v3-sdk";
+
+
+
 
 const abi = new ethers.AbiCoder();
 
