@@ -5,6 +5,7 @@ import addresses from "./addresses.json";
 import { UniversalRouter } from "./Factories";
 import { getTransactions } from "./read";
 import { Pool, SwapRoute } from "./dex";
+import { FeeAmount } from "@uniswap/v3-sdk";
 
 const abi = new ethers.AbiCoder();
 
@@ -43,7 +44,7 @@ export function parse(tx: ethers.TransactionResponse) {
 						const window = path.slice(2).substring(l, r);
 
 						const token0 = "0x" + window.substring(l, l + 40);
-						const fee = "0x" + window.substring(l + 40, l + 46);
+						const fee = ethers.toNumber("0x" + window.substring(l + 40, l + 46)) as FeeAmount;
 						const token1 = "0x" + window.substring(l + 46, r);
 
 						const pool: Pool = { token0, token1, fee };
