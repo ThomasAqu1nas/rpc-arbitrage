@@ -4,6 +4,7 @@ import { commands, DataValueType } from "./commands";
 import addresses from "./addresses.json";
 import { UniversalRouter } from "./Factories";
 import { getTransactions } from "./read";
+import { Pool, SwapRoute } from "./dex";
 
 const abi = new ethers.AbiCoder();
 
@@ -26,35 +27,38 @@ export function parse(tx: ethers.TransactionResponse) {
 			const command_id = byte & 0x1f; // 00011111
 			const command_value = commands.get(command_id);
 
-			console.log(command_value);
-
 			if (command_id == 0 || command_id == 1) {
-				const encoded = parsed[1][id];
+				if (command_value) {
+					const decoded = abi.decode(command_value!.iface, parsed[1][id]);
+					const path: string = decoded[3];
 
-				
+					console.log("LEN:", path.length);
 
-                if (command_value) {
-                    const decoded = abi.decode(command_value!.iface, parsed[1][id]);
-                    const paths = decoded[3];
-                    let hexified_paths = ethers.toBeHex(paths)
-                    let i = 0;
-                    while (hexified_paths !== "") {
-                        if (i % 2 === 0) {
-                            const paths_array = []
-                            let [rest, current] = [
-                                hexified_paths.substring(0, hexified_paths.length - 23), 
-                                hexified_paths.substring(hexified_paths.length)
-                            ]
-                            hexified_paths = rest;
-                            
-                            
-                        }
-                    }
-                    //console.log(decoded);
-                }
-                
+					let l = 0;
+					let r = 86;
 
-				// decoded[3] - строка адресов 
+					const route: SwapRoute = [];
+
+					while (r <= path.length) {
+						const window = path.slice(2).substring(l, r);
+
+						const token0 = "0x" + window.substring(l, l + 40);
+						const fee = "0x" + window.substring(l + 40, l + 46);
+						const token1 = "0x" + window.substring(l + 46, r);
+
+						const pool: Pool = { token0, token1, fee };
+
+						route.push(pool);
+
+						l += 46;
+						r += 46;
+					}
+					console.log(route);
+
+					console.log(decoded);
+				}
+
+				// decoded[3] - строка адресов
 
 				// const paths = decoded[3];
 				// console.log("##################################################");
