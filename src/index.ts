@@ -4,8 +4,19 @@ import { commands, DataValueType } from "./commands";
 import addresses from "./addresses.json";
 import { UniversalRouter } from "./Factories";
 import { getTransactions } from "./read";
-import {Pool} from "@uniswap/v3-sdk";
 import "@uniswap/v3-periphery";
+
+export interface Pool {
+	token0: string;
+	token1: string;
+	fee: ethers.BigNumberish;
+}
+
+export interface SwapRoute {
+	route: Pool[];
+	hops?: number;
+}
+
 
 const abi = new ethers.AbiCoder();
 
@@ -41,18 +52,30 @@ export function parse(tx: ethers.TransactionResponse) {
                     let hexified_paths = ethers.toBeHex(paths)
                     let i = 0;
                     while (hexified_paths !== "") {
-                        let pool_data = {
+                        let pool_data: Pool = {
                             token0: "",
                             token1: "",
-                            fee: 0
+                            fee: ""
                         };
                         if (i % 2 === 0) {
                             const paths_array = []
                             let [rest, current] = [
-                                hexified_paths.substring(0, hexified_paths.length - 23), 
+                                hexified_paths.substring(0, hexified_paths.length - 86), 
                                 hexified_paths.substring(hexified_paths.length)
                             ]
-                            hexified_paths = rest;
+                            let j = 0;
+                            while (current !== "") {
+                                if (j != 1) {
+                                    pool_data.token0 = current.substring(current.length - 40, current.length);
+                                    current = current.substring(0, current.length - 40);
+                                    j++;
+                                }
+                                else if (j == 1) {
+                                    pool_data.fee = current.substring(current.length - 6, current.length);
+                                    current = current.substring(0, current.length - 6);
+                                    j++;
+                                }                                
+                            }
 
                             // paths -> [{token0, token1, fee1},{token1, token2, fee2}, ...]
                             
