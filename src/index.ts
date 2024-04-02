@@ -4,19 +4,7 @@ import { commands, DataValueType } from "./commands";
 import addresses from "./addresses.json";
 import { UniversalRouter } from "./Factories";
 import { getTransactions } from "./read";
-import "@uniswap/v3-periphery";
-
-export interface Pool {
-	token0: string;
-	token1: string;
-	fee: ethers.BigNumberish;
-}
-
-export interface SwapRoute {
-	route: Pool[];
-	hops?: number;
-}
-
+import { Pool, SwapRoute } from "./dex";
 
 const abi = new ethers.AbiCoder();
 
@@ -39,51 +27,37 @@ export function parse(tx: ethers.TransactionResponse) {
 			const command_id = byte & 0x1f; // 00011111
 			const command_value = commands.get(command_id);
 
-			console.log(command_value);
-
 			if (command_id == 0 || command_id == 1) {
-				const encoded = parsed[1][id];
+				if (command_value) {
+					const decoded = abi.decode(command_value!.iface, parsed[1][id]);
+					const path: string = decoded[3];
 
-				
+					console.log("LEN:", path.length);
 
-                if (command_value) {
-                    const decoded = abi.decode(command_value!.iface, parsed[1][id]);
-                    const paths = decoded[3];
-                    let hexified_paths = ethers.toBeHex(paths)
-                    let i = 0;
-                    while (hexified_paths !== "") {
-                        let pool_data: Pool = {
-                            token0: "",
-                            token1: "",
-                            fee: ""
-                        };
-                        if (i % 2 === 0) {
-                            const paths_array = []
-                            let [rest, current] = [
-                                hexified_paths.substring(0, hexified_paths.length - 86), 
-                                hexified_paths.substring(hexified_paths.length)
-                            ]
-                            let j = 0;
-                            while (current !== "") {
-                                if (j != 1) {
-                                    pool_data.token0 = current.substring(current.length - 40, current.length);
-                                    current = current.substring(0, current.length - 40);
-                                    j++;
-                                }
-                                else if (j == 1) {
-                                    pool_data.fee = current.substring(current.length - 6, current.length);
-                                    current = current.substring(0, current.length - 6);
-                                    j++;
-                                }                                
-                            }
+					let l = 0;
+					let r = 86;
 
-                            // paths -> [{token0, token1, fee1},{token1, token2, fee2}, ...]
-                            
-                        }
-                    }
-                    //console.log(decoded);
-                }
-                
+					const route: SwapRoute = [];
+
+					while (r <= path.length) {
+						const window = path.slice(2).substring(l, r);
+
+						const token0 = "0x" + window.substring(l, l + 40);
+						const fee = "0x" + window.substring(l + 40, l + 46);
+						const token1 = "0x" + window.substring(l + 46, r);
+
+						const pool: Pool = { token0, token1, fee };
+
+						route.push(pool);
+
+						l += 46;
+						r += 46;
+					}
+					console.log(route);
+
+					console.log(decoded);
+				}
+
 				// decoded[3] - строка адресов
 
 				// const paths = decoded[3];
