@@ -4,6 +4,8 @@ import { commands, DataValueType } from "./commands";
 import addresses from "./addresses.json";
 import { UniversalRouter } from "./Factories";
 import { getTransactions } from "./read";
+import {Pool} from "@uniswap/v3-sdk";
+import "@uniswap/v3-periphery";
 
 const abi = new ethers.AbiCoder();
 
@@ -39,6 +41,11 @@ export function parse(tx: ethers.TransactionResponse) {
                     let hexified_paths = ethers.toBeHex(paths)
                     let i = 0;
                     while (hexified_paths !== "") {
+                        let pool_data = {
+                            token0: "",
+                            token1: "",
+                            fee: 0
+                        };
                         if (i % 2 === 0) {
                             const paths_array = []
                             let [rest, current] = [
@@ -46,14 +53,14 @@ export function parse(tx: ethers.TransactionResponse) {
                                 hexified_paths.substring(hexified_paths.length)
                             ]
                             hexified_paths = rest;
-                            
+
+                            // paths -> [{token0, token1, fee1},{token1, token2, fee2}, ...]
                             
                         }
                     }
                     //console.log(decoded);
                 }
                 
-
 				// decoded[3] - строка адресов
 
 				// const paths = decoded[3];
