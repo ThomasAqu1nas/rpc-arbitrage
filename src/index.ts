@@ -54,7 +54,7 @@ export function parse(tx: ethers.TransactionResponse) {
                 }
                 
 
-				// decoded[3] - строка адресов
+				// decoded[3] - строка адресов 
 
 				// const paths = decoded[3];
 				// console.log("##################################################");
