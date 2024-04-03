@@ -29,11 +29,14 @@ library Oracle {
         int24 tick;
     }
 
-    function compute(IUniswapV3Pool poolA, IUniswapV3Pool poolB)
+    function compute(address poolAAddr, address poolBAddr)
         public
         view
         returns (uint160 priceA, uint160 priceB, bool arbitrage)
     {
+        IUniswapV3Pool poolA = IUniswapV3Pool(poolAAddr);
+        IUniswapV3Pool poolB = IUniswapV3Pool(poolBAddr);
+
         PoolData memory A;
         PoolData memory B;
 
