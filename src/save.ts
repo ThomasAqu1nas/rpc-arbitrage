@@ -1,5 +1,5 @@
 import fs from "fs"
-import { ipcProvider } from "./ipcConnection";
+import { ipcProvider } from "../scripts/ipcConnection";
 import { TransactionResponse } from "ethers";
 // Путь к файлу, в который будут сохраняться данные
 const filePath = './transactions.json';

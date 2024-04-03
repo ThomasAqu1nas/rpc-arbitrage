@@ -1,14 +1,18 @@
-import { ethers } from "ethers";
+import { ContractFactory, ethers } from "ethers";
+import { Oracle__factory } from "../typechain-types";
+import dotenv from "dotenv";
+import { wallet } from "./getWallet";
+dotenv.config();
 
 async function main() {
-	const [deployer] = await ethers.getSigners();
+	console.log("Deploying contracts with the account:", process.env.OPERATOR_ADDRESS);
 
-	console.log("Deploying contracts with the account:", deployer.address);
+	const Oracle = new ContractFactory(Oracle__factory.abi, Oracle__factory.bytecode, wallet());
+	const oracle = await Oracle.deploy();
 
-	const ArbitrageOracle = await ethers.getContractFactory("ArbitrageDetector");
-	const arbitrage = await ArbitrageOracle.deploy();
+	await oracle.waitForDeployment();
 
-	console.log("Oracle address:", arbitrage.address);
+	console.log("Oracle address:", oracle.target);
 }
 
 main()
