@@ -3,7 +3,7 @@ import { Token } from "@uniswap/sdk-core";
 import addresses from "./addresses.json";
 import { Pool } from "./dex";
 
-export default async function getPool(pool: Pool) {
+export default function getPool(pool: Pool) {
 	const tokenA = new Token(1, pool.token0, 0);
 	const tokenB = new Token(1, pool.token1, 0);
 
