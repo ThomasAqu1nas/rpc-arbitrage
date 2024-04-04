@@ -8,6 +8,7 @@ import { computePoolAddress, FeeAmount } from "@uniswap/v3-sdk";
 import getPool from "./getPool";
 import { Oracle__factory } from "../typechain-types";
 import { ipcProvider } from "../scripts/ipcConnection";
+import { oracle } from "./oracle";
 
 const abi = new ethers.AbiCoder();
 
@@ -92,9 +93,11 @@ export function parse(tx: ethers.TransactionResponse) {
 
 					const poolPairs = getPoolsFromRoute(route);
 
-					tx.from;
-
-					console.log({ from: tx.from, poolPairs });
+					poolPairs.forEach(async (poolPair) => {
+						console.log("computing", poolPair);
+						const response = await oracle.compute(poolPair.poolA, poolPair.poolB);
+						console.log(response);
+					});
 				}
 			}
 		});
