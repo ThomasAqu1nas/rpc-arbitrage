@@ -46,8 +46,7 @@ function getPoolsFromRoute(route: SwapRoute): ArbitrageParams[] {
 	const poolPairs: ArbitrageParams[] = [];
 
 	for (const pool1 of route) {
-		const pool1Address = getPool(pool1);
-		let pool2Address: string;
+		const pool1Address = getPool(pool1, "sepolia");
 
 		fees.forEach(async (fee) => {
 			if (fee === pool1.fee) return;
@@ -57,7 +56,7 @@ function getPoolsFromRoute(route: SwapRoute): ArbitrageParams[] {
 				fee: fee,
 			};
 
-			pool2Address = getPool(pool2);
+			const pool2Address = getPool(pool2, "sepolia");
 
 			poolPairs.push({ poolA: pool1Address, poolB: pool2Address });
 		});
@@ -70,11 +69,11 @@ export function parse(tx: ethers.TransactionResponse) {
 	const selector = tx.data.substring(0, 10);
 	const to = tx.to;
 
-	if (addresses.mainnet.uniswap.universalRouter === to && selector === "0x24856bc3") {
+	if (addresses.v3.sepolia.universalRouter === to && selector === "0x24856bc3") {
 		const parsed = UniversalRouter.interface.parseTransaction(tx)!.args;
 
 		const commandBytes = ethers.getBytes(parsed[0]);
-	} else if (addresses.mainnet.uniswap.universalRouter === to && selector === "0x3593564c") {
+	} else if (addresses.v3.mainnet.universalRouter === to && selector === "0x3593564c") {
 		const parsed = UniversalRouter.interface.parseTransaction(tx)!.args;
 
 		const commandBytes = ethers.getBytes(parsed[0]);
