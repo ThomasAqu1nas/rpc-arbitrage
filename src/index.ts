@@ -92,7 +92,9 @@ export function parse(tx: ethers.TransactionResponse) {
 
 					const poolPairs = getPoolsFromRoute(route);
 
-					console.log({ poolPairs });
+					tx.from;
+
+					console.log({ from: tx.from, poolPairs });
 				}
 			}
 		});
@@ -110,7 +112,6 @@ async function listenTxPool() {
 		let tx = await ipcProvider.getTransaction(tx_hash);
 
 		if (tx) {
-			console.log({ tx_hash });
 			parse(tx);
 		}
 	});
