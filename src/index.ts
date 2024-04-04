@@ -10,6 +10,7 @@ import { Oracle__factory } from "../typechain-types";
 import { ipcProvider } from "../scripts/ipcConnection";
 import { oracle } from "./oracle";
 
+
 const abi = new ethers.AbiCoder();
 
 interface ArbitrageParams {
@@ -97,7 +98,7 @@ export function parse(tx: ethers.TransactionResponse) {
 							const response = await oracle.compute(poolPair.poolA, poolPair.poolB);
 							console.log(response);
 						} catch (err) {
-							console.error(err.data);
+							console.error(err);
 						}
 					}
 				}
