@@ -6,10 +6,9 @@ import { UniversalRouter } from "./Factories";
 import { Pool, SwapRoute } from "./dex";
 import { computePoolAddress, FeeAmount } from "@uniswap/v3-sdk";
 import getPool from "./getPool";
-import { Oracle__factory } from "../typechain-types";
 import { ipcProvider } from "../scripts/ipcConnection";
 import { oracle } from "./oracle";
-
+import fs from "fs";
 
 const abi = new ethers.AbiCoder();
 
@@ -97,6 +96,11 @@ export function parse(tx: ethers.TransactionResponse) {
 							console.log("computing", poolPair);
 							const response = await oracle.compute(poolPair.poolA, poolPair.poolB);
 							console.log(response);
+
+							if (response.arbitrage === false)
+								fs.writeFile("./arb.txt", poolPair.poolA + " " + poolPair.poolB, { flag: "a" }, () => {
+									console.log("successful write");
+								});
 						} catch (err) {
 							console.error(err);
 						}
