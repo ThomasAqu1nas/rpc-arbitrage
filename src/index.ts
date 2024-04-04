@@ -72,14 +72,12 @@ export function parse(tx: ethers.TransactionResponse) {
 
 	if (addresses.v3.sepolia.universalRouter === to && selector === "0x24856bc3") {
 		const parsed = UniversalRouter.interface.parseTransaction(tx)!.args;
-
-		const commandBytes = ethers.getBytes(parsed[0]);
 	} else if (addresses.v3.mainnet.universalRouter === to && selector === "0x3593564c") {
 		const parsed = UniversalRouter.interface.parseTransaction(tx)!.args;
 
 		const commandBytes = ethers.getBytes(parsed[0]);
 
-		commandBytes.forEach((byte, id) => {
+		commandBytes.forEach(async (byte, id) => {
 			const command_id = byte & 0x1f; // 00011111
 			const command_value = commands.get(command_id);
 
@@ -93,11 +91,15 @@ export function parse(tx: ethers.TransactionResponse) {
 
 					const poolPairs = getPoolsFromRoute(route);
 
-					poolPairs.forEach(async (poolPair) => {
-						console.log("computing", poolPair);
-						const response = await oracle.compute(poolPair.poolA, poolPair.poolB);
-						console.log(response);
-					});
+					for (const poolPair of poolPairs) {
+						try {
+							console.log("computing", poolPair);
+							const response = await oracle.compute(poolPair.poolA, poolPair.poolB);
+							console.log(response);
+						} catch (err) {
+							console.error(err.data);
+						}
+					}
 				}
 			}
 		});
