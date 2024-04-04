@@ -22,6 +22,7 @@ const config: HardhatUserConfig = {
 			accounts: ["6478deef7de442fa81ec98eaf2442da82e4c2baf517ddc88514cc8cf425c486d"],
 		},
 	},
+	defaultNetwork: "localhost"
 };
 
 export default config;

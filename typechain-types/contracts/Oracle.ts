@@ -75,7 +75,7 @@ export interface Oracle extends BaseContract {
   ): Promise<this>;
 
   compute: TypedContractMethod<
-    [poolA: AddressLike, poolB: AddressLike],
+    [poolAAddr: AddressLike, poolBAddr: AddressLike],
     [
       [bigint, bigint, boolean] & {
         priceA: bigint;
@@ -93,7 +93,7 @@ export interface Oracle extends BaseContract {
   getFunction(
     nameOrSignature: "compute"
   ): TypedContractMethod<
-    [poolA: AddressLike, poolB: AddressLike],
+    [poolAAddr: AddressLike, poolBAddr: AddressLike],
     [
       [bigint, bigint, boolean] & {
         priceA: bigint;

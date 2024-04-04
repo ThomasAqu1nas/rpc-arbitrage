@@ -4,14 +4,14 @@ import { commands, DataValueType } from "./commands";
 import addresses from "./addresses.json";
 import { UniversalRouter } from "./Factories";
 import { getTransactions } from "./read";
-import "@uniswap/v3-periphery";
 import { Pool, SwapRoute } from "./dex";
 import { FeeAmount } from "@uniswap/v3-sdk";
-
-
-
+import getPool from "./getPool";
+import { Oracle__factory } from "../typechain-types";
+import { ipcProvider } from "../scripts/ipcConnection";
 
 const abi = new ethers.AbiCoder();
+
 
 export function parse(tx: ethers.TransactionResponse) {
 	const selector = tx.data.substring(0, 10);
@@ -22,7 +22,6 @@ export function parse(tx: ethers.TransactionResponse) {
 
 		const commandBytes = ethers.getBytes(parsed[0]);
 
-		console.log("TRANSACTION:", tx, "\n");
 	} else if (addresses.mainnet.uniswap.universalRouter === to && selector === "0x3593564c") {
 		const parsed = UniversalRouter.interface.parseTransaction(tx)!.args;
 
@@ -37,8 +36,6 @@ export function parse(tx: ethers.TransactionResponse) {
 					const decoded = abi.decode(command_value!.iface, parsed[1][id]);
 					const path: string = decoded[3];
 
-					console.log("LEN:", path.length);
-
 					let l = 0;
 					let r = 86;
 
@@ -51,16 +48,38 @@ export function parse(tx: ethers.TransactionResponse) {
 						const fee = ethers.toNumber("0x" + window.substring(l + 40, l + 46)) as FeeAmount;
 						const token1 = "0x" + window.substring(l + 46, r);
 
-						const pool: Pool = { token0, token1, fee };
+						const pool1: Pool = { token0, token1, fee };
 
-						route.push(pool);
+						const arr = [100,500,3000,10000] // enum
+
+						arr.forEach(async _fee => {
+							if (_fee != fee) {
+								const pool2: Pool = {
+									token0, token1, fee: _fee as FeeAmount
+								}
+								const pool1_address = getPool(pool1);
+								const pool2_address = getPool(pool2);
+								const oracle_contract = new ethers.Contract(
+									"0xe22a4d048D0823aD4fa663F2D506ff2a34f146Fd",
+									Oracle__factory.abi, 
+									ipcProvider
+								)
+								try {
+									const oracle_outputs = await oracle_contract.compute(pool1_address, pool2_address);
+									console.log("oracle_outputs:   ", oracle_outputs)
+								} catch(e) {
+									console.error(e)
+								}
+
+							}
+						})
+
+
+						route.push(pool1);
 
 						l += 46;
 						r += 46;
 					}
-					console.log(route);
-
-					console.log(decoded);
 				}
 
 				// decoded[3] - строка адресов
@@ -84,11 +103,14 @@ export function parse(tx: ethers.TransactionResponse) {
  */
 
 async function listenTxPool() {
-	const txs = await getTransactions();
+	//const txs = await getTransactions();
+	ipcProvider.on("pending", async (tx_hash: string) => {
+		let tx = await ipcProvider.getTransaction(tx_hash);
+		if (tx) {
+			parse(tx);
+		}
+	})
 
-	for (const tx of txs) {
-		parse(tx);
-	}
 
 	// ipcProvider.on("pending", async (tx_hash: string) => {
 	// 	let tx = await ipcProvider.getTransaction(tx_hash);
