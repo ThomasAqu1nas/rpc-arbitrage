@@ -1,3 +1,1 @@
-mnemonic: push swallow female machine broccoli chicken version era bargain arch list napkin
-private key: 0x8f92263de6d1e24cf258a17250ca5ca4a2f7441601fcb1f539fd115eaf715714
-address: 0xE954B0F4061B4a02439ac003610FF6eef2F28141
+
