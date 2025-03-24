@@ -1,0 +1,224 @@
+[
+  {
+    "token0": "0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270",
+    "token1": "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619",
+    "fee1": 500,
+    "fee2": 3000
+  },
+  {
+    "token0": "0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270",
+    "token1": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+    "fee1": 500,
+    "fee2": 3000
+  },
+  {
+    "token0": "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619",
+    "token1": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+    "fee1": 500,
+    "fee2": 3000
+  },
+  {
+    "token0": "0xc2132d05d31c914a87c6611c10748aeb04b58e8f",
+    "token1": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+    "fee1": 500,
+    "fee2": 100
+  },
+  {
+    "token0": "0x1bfd67037b42cf73acf2047067bd4f2c47d9bfd6",
+    "token1": "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619",
+    "fee1": 500,
+    "fee2": 3000
+  },
+  {
+    "token0": "0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270",
+    "token1": "0xc2132d05d31c914a87c6611c10748aeb04b58e8f",
+    "fee1": 500,
+    "fee2": 3000
+  },
+  {
+    "token0": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+    "token1": "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619",
+    "fee1": 500,
+    "fee2": 10000
+  },
+  {
+    "token0": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+    "token1": "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619",
+    "fee1": 10000,
+    "fee2": 3000
+  },
+  {
+    "token0": "0xc2132d05d31c914a87c6611c10748aeb04b58e8f",
+    "token1": "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619",
+    "fee1": 500,
+    "fee2": 3000
+  },
+  {
+    "token0": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+    "token1": "0x8f3cf7ad23cd3cadbd9735aff958023239c6a063",
+    "fee1": 500,
+    "fee2": 100
+  },
+  {
+    "token0": "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619",
+    "token1": "0xE5417Af564e4bFDA1c483642db72007871397896",
+    "fee1": 10000,
+    "fee2": 3000
+  },
+  {
+    "token0": "0x1bfd67037b42cf73acf2047067bd4f2c47d9bfd6",
+    "token1": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+    "fee1": 500,
+    "fee2": 3000
+  },
+  {
+    "token0": "0x1bfd67037b42cf73acf2047067bd4f2c47d9bfd6",
+    "token1": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+    "fee1": 100,
+    "fee2": 3000
+  },
+  {
+    "token0": "0x1bfd67037b42cf73acf2047067bd4f2c47d9bfd6",
+    "token1": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+    "fee1": 100,
+    "fee2": 500
+  },
+  {
+    "token0": "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619",
+    "token1": "0x1bfd67037b42cf73acf2047067bd4f2c47d9bfd6",
+    "fee1": 10000,
+    "fee2": 3000
+  },
+  {
+    "token0": "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619",
+    "token1": "0x1bfd67037b42cf73acf2047067bd4f2c47d9bfd6",
+    "fee1": 10000,
+    "fee2": 500
+  },
+  {
+    "token0": "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619",
+    "token1": "0x1bfd67037b42cf73acf2047067bd4f2c47d9bfd6",
+    "fee1": 10000,
+    "fee2": 100
+  },
+  {
+    "token0": "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619",
+    "token1": "0x1bfd67037b42cf73acf2047067bd4f2c47d9bfd6",
+    "fee1": 100,
+    "fee2": 500
+  },
+  {
+    "token0": "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619",
+    "token1": "0x1bfd67037b42cf73acf2047067bd4f2c47d9bfd6",
+    "fee1": 100,
+    "fee2": 3000
+  },
+  {
+    "token0": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+    "token1": "0xb33eaad8d922b1083446dc23f610c2567fb5180f",
+    "fee1": 10000,
+    "fee2": 3000
+  },
+  {
+    "token0": "0xc2132d05d31c914a87c6611c10748aeb04b58e8f",
+    "token1": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+    "fee1": 3000,
+    "fee2": 100
+  },
+  {
+    "token0": "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619",
+    "token1": "0xc2132d05d31c914a87c6611c10748aeb04b58e8f",
+    "fee1": 10000,
+    "fee2": 500
+  },
+  {
+    "token0": "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619",
+    "token1": "0xc2132d05d31c914a87c6611c10748aeb04b58e8f",
+    "fee1": 10000,
+    "fee2": 3000
+  },
+  {
+    "token0": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+    "token1": "0xE5417Af564e4bFDA1c483642db72007871397896",
+    "fee1": 10000,
+    "fee2": 3000
+  },
+  {
+    "token0": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+    "token1": "0xa3fa99a148fa48d14ed51d610c367c61876997f1",
+    "fee1": 100,
+    "fee2": 500
+  },
+  {
+    "token0": "0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270",
+    "token1": "0xb33eaad8d922b1083446dc23f610c2567fb5180f",
+    "fee1": 10000,
+    "fee2": 3000
+  },
+  {
+    "token0": "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619",
+    "token1": "0xd6df932a45c0f255f85145f286ea0b292b21c90b",
+    "fee1": 10000,
+    "fee2": 500
+  },
+  {
+    "token0": "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619",
+    "token1": "0xd6df932a45c0f255f85145f286ea0b292b21c90b",
+    "fee1": 10000,
+    "fee2": 3000
+  },
+  {
+    "token0": "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619",
+    "token1": "0xd6df932a45c0f255f85145f286ea0b292b21c90b",
+    "fee1": 3000,
+    "fee2": 500
+  },
+  {
+    "token0": "0x53e0bca35ec356bd5dddfebbd1fc0fd03fabad39",
+    "token1": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+    "fee1": 3000,
+    "fee2": 500
+  },
+  {
+    "token0": "0x53e0bca35ec356bd5dddfebbd1fc0fd03fabad39",
+    "token1": "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619",
+    "fee1": 3000,
+    "fee2": 500
+  },
+  {
+    "token0": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+    "token1": "0x8f3cf7ad23cd3cadbd9735aff958023239c6a063",
+    "fee1": 3000,
+    "fee2": 100
+  },
+  {
+    "token0": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+    "token1": "0x8f3cf7ad23cd3cadbd9735aff958023239c6a063",
+    "fee1": 500,
+    "fee2": 3000
+  },
+  {
+    "token0": "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619",
+    "token1": "0x8f3cf7ad23cd3cadbd9735aff958023239c6a063",
+    "fee1": 3000,
+    "fee2": 10000
+  },
+  {
+    "token0": "0x172370d5cd63279efa6d502dab29171933a610af",
+    "token1": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+    "fee1": 10000,
+    "fee2": 3000
+  },
+  {
+    "token0": "0x172370d5cd63279efa6d502dab29171933a610af",
+    "token1": "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619",
+    "fee1": 10000,
+    "fee2": 3000
+  },
+  {
+    "token0": "0x2760e46d9bb43dafcbecaad1f64b93207f9f0ed7",
+    "token1": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+    "fee1": 3000,
+    "fee2": 10000
+  }
+]

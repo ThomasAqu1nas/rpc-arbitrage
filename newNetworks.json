@@ -1,0 +1,34 @@
+{
+  "evmos": {
+    "rpc": "https://evmos-evm.publicnode.com",
+    "wNative": "0xD4949664cD82660AaE99bEdc034a0deA8A0bd517",
+    "factory": "0xf544365e7065966f190155F629cE0182fC68Eaa2",
+    "router": "0x5b5e44da9718288244110e66a7ca6c537f36f948",
+    "executor": "0xaf654c206daddc263f4f6d048a76463b524c44ce",
+    "oracle": "0x454605c5481fa83edabd21cbd02abbf066b13cee"
+  },
+  "ethereum": {
+    "rpc": "https://mainnet.infura.io/v3/a92744750bbb442a80d6f2b4dfb66c1d",
+    "wNative": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+    "factory": "0x1F98431c8aD98523631AE4a59f267346ea31F984",
+    "router": "0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45",
+    "executor": "",
+    "oracle": ""
+  },
+  "matic": {
+    "rpc": "https://polygon.meowrpc.com",
+    "wNative": "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
+    "factory": "0x1F98431c8aD98523631AE4a59f267346ea31F984",
+    "router": "0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45",
+    "executor": "0xE195707fFA87432E6C2850083006f91F2471deAE",
+    "oracle": "0x2B78F75da68AF4da663204e377d099BfC81a152c"
+  },
+  "bsc": {
+    "rpc": "",
+    "wNative": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+    "factory": "0xdB1d10011AD0Ff90774D0C6Bb92e5C5c8b4461F7",
+    "router": "0xB971eF87ede563556b2ED4b1C0b0019111Dd85d2",
+    "executor": "",
+    "oracle": ""
+  }
+}
